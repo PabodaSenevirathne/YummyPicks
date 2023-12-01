@@ -1,3 +1,6 @@
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using YummyPicks.Data;
 namespace YummyPicks
 {
     public class Program
@@ -5,6 +8,8 @@ namespace YummyPicks
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+            builder.Services.AddDbContext<YummyPicksContext>(options =>
+                options.UseSqlServer(builder.Configuration.GetConnectionString("YummyPicksContext") ?? throw new InvalidOperationException("Connection string 'YummyPicksContext' not found.")));
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
