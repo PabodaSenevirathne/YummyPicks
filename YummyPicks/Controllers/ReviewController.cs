@@ -20,12 +20,30 @@ namespace YummyPicks.Controllers
         }
 
         // GET: Review
-        public async Task<IActionResult> Index()
+        //public async Task<IActionResult> Index()
+        //{
+        //    return _context.Review != null ?
+        //                View(await _context.Review.ToListAsync()) :
+        //                Problem("Entity set 'YummyPicksContext.Review'  is null.");
+        //}
+
+        public async Task<IActionResult> Index(string search)
         {
-            return _context.Review != null ?
-                        View(await _context.Review.ToListAsync()) :
-                        Problem("Entity set 'YummyPicksContext.Review'  is null.");
+            var reviews = _context.Review.AsQueryable();
+
+            if (!string.IsNullOrEmpty(search))
+            {
+                reviews = reviews.Where(review =>
+                    review.RestaurantName.Contains(search) ||
+                    review.Price.ToString().Contains(search) ||
+                    review.FoodName.Contains(search) ||
+                    review.PublishingDate.ToString().Contains(search)
+                );
+            }
+
+            return View(await reviews.ToListAsync());
         }
+
 
         // GET: Review/Details/5
         public async Task<IActionResult> Details(int? id)
