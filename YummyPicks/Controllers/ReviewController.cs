@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -130,6 +131,7 @@ namespace YummyPicks.Controllers
             return NotFound();
         }
         // GET: Review/Edit/5
+
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Review == null)
@@ -142,43 +144,104 @@ namespace YummyPicks.Controllers
             {
                 return NotFound();
             }
-            return View(review);
+            var viewModel = new ReviewViewModel
+            {
+                Id = review.Id,
+                RestaurantName = review.RestaurantName,
+                FoodName = review.FoodName,
+                Price = review.Price,
+                PublishingDate = review.PublishingDate,
+
+            };
+
+            return View(viewModel);
         }
+
+
+        //public async Task<IActionResult> Edit(int? id)
+        //{
+        //    if (id == null || _context.Review == null)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    var review = await _context.Review.FindAsync(id);
+        //    if (review == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    return View(review);
+        //}
 
         // POST: Review/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,RestaurantName,FoodName,Price,PublishingDate,Image")] Review review)
+        public async Task<IActionResult> Edit(ReviewViewModel Re)
         {
-            if (id != review.Id)
+
+            if (Re.Photo != null)
             {
-                return NotFound();
+                using (var memoryStream = new MemoryStream())
+                {
+                    await Re.Photo.CopyToAsync(memoryStream);
+
+                    Review Review1 = new Review()
+                    {
+                        Id = Re.Id,
+                        RestaurantName = Re.RestaurantName,
+                        FoodName = Re.FoodName,
+                        Price = Re.Price,
+                        PublishingDate = Re.PublishingDate,
+                        Image = memoryStream.ToArray()
+                    };
+                    _context.Update(Review1);
+                   await _context.SaveChangesAsync();
+
+                    ViewBag.success = "record updated";
+                    return RedirectToAction(nameof(Index));
+
+                }
             }
 
-            if (ModelState.IsValid)
+            else
             {
-                try
-                {
-                    _context.Update(review);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!ReviewExists(review.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
                 return RedirectToAction(nameof(Index));
             }
-            return View(review);
+
         }
+
+
+        //public async Task<IActionResult> Edit(int id, [Bind("Id,RestaurantName,FoodName,Price,PublishingDate,Image")] Review review)
+        //{
+        //    if (id != review.Id)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    if (ModelState.IsValid)
+        //    {
+        //        try
+        //        {
+        //            _context.Update(review);
+        //            await _context.SaveChangesAsync();
+        //        }
+        //        catch (DbUpdateConcurrencyException)
+        //        {
+        //            if (!ReviewExists(review.Id))
+        //            {
+        //                return NotFound();
+        //            }
+        //            else
+        //            {
+        //                throw;
+        //            }
+        //        }
+        //        return RedirectToAction(nameof(Index));
+        //    }
+        //    return View(review);
+        //}
 
         // GET: Review/Delete/5
         public async Task<IActionResult> Delete(int? id)

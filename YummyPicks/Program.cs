@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using YummyPicks.Data;
+using YummyPicks.Models;
 namespace YummyPicks
 {
     public class Program
@@ -15,6 +16,15 @@ namespace YummyPicks
             builder.Services.AddControllersWithViews();
 
             var app = builder.Build();
+
+
+            using (var scope = app.Services.CreateScope())
+            {
+                var services = scope.ServiceProvider;
+
+                Seed.Initialize(services);
+            }
+
 
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())

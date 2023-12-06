@@ -13,6 +13,22 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "C:\\Users\\Paboda Senevirathne\\Desktop\\Conestoga\\Software Development Techniques\\Assignmnet\\FinalProject\\YummyPicks\\YummyPicks\\wwwroot\\images\\pasta.jpg",
+      "PackagePath": "staticwebassets\\images\\pasta.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Paboda Senevirathne\\Desktop\\Conestoga\\Software Development Techniques\\Assignmnet\\FinalProject\\YummyPicks\\YummyPicks\\wwwroot\\images\\pizza.jpg",
+      "PackagePath": "staticwebassets\\images\\pizza.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Paboda Senevirathne\\Desktop\\Conestoga\\Software Development Techniques\\Assignmnet\\FinalProject\\YummyPicks\\YummyPicks\\wwwroot\\images\\rice.jpg",
+      "PackagePath": "staticwebassets\\images\\rice.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Paboda Senevirathne\\Desktop\\Conestoga\\Software Development Techniques\\Assignmnet\\FinalProject\\YummyPicks\\YummyPicks\\wwwroot\\images\\salad.jpg",
+      "PackagePath": "staticwebassets\\images\\salad.jpg"
+    },
+    {
       "Id": "C:\\Users\\Paboda Senevirathne\\Desktop\\Conestoga\\Software Development Techniques\\Assignmnet\\FinalProject\\YummyPicks\\YummyPicks\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
     },

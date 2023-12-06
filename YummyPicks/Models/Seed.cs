@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using YummyPicks.Data;
+using YummyPicks.Models;
 
 namespace YummyPicks.Models
 {
@@ -19,35 +20,35 @@ namespace YummyPicks.Models
                 context.Review.AddRange(
                     new Review
                     {
-                        RestaurantName = "Delicious Bites",
-                        FoodName = "Spaghetti Carbonara",
+                        RestaurantName = "ZestSpot",
+                        FoodName = "Spaghetti",
                         Price = 15.99,
                         PublishingDate = DateTime.Parse("2022-10-15"),
-                        //Image = GetImageData("spaghetti.jpg")
+                        Image = File.ReadAllBytes("wwwroot/images/pizza.jpg")
                     },
                     new Review
                     {
-                        RestaurantName = "Tasty Haven",
-                        FoodName = "Grilled Salmon",
+                        RestaurantName = "YumLoom",
+                        FoodName = "Pasta",
                         Price = 22.50,
                         PublishingDate = DateTime.Parse("2022-11-05"),
-                        //Image = GetImageData("salmon.jpg")
+                        Image = File.ReadAllBytes("wwwroot/images/pasta.jpg")
                     },
                     new Review
                     {
-                        RestaurantName = "Sizzle Delight",
-                        FoodName = "Margherita Pizza",
+                        RestaurantName = "FlavorNest",
+                        FoodName = "Salad",
                         Price = 12.75,
                         PublishingDate = DateTime.Parse("2022-09-20"),
-                        //Image = GetImageData("pizza.jpg")
+                        Image = File.ReadAllBytes("wwwroot/images/salad.jpg")
                     },
                     new Review
                     {
-                        RestaurantName = "Spicy Bites",
-                        FoodName = "Chicken Curry",
+                        RestaurantName = "SavvySpoon",
+                        FoodName = "Rice",
                         Price = 18.99,
                         PublishingDate = DateTime.Parse("2023-01-08"),
-                        //Image = GetImageData("curry.jpg")
+                        Image = File.ReadAllBytes("wwwroot/images/rice.jpg")
                     }
                 );
                 context.SaveChanges();
