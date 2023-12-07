@@ -12,10 +12,10 @@ namespace YummyPicks.Models
                 serviceProvider.GetRequiredService<
                     DbContextOptions<YummyPicksContext>>()))
             {
-                // Look for any review.
+    
                 if (context.Review.Any())
                 {
-                    return;   // DB has been seeded
+                    return;
                 }
                 context.Review.AddRange(
                     new Review

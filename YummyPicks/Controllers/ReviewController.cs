@@ -108,12 +108,12 @@ namespace YummyPicks.Controllers
             var review = await _context.Review.FindAsync(id);
             if (review.Image != null)
             {
-                return File(review.Image, "image/jpeg"); // Change "image/jpeg" based on your image type
+                return File(review.Image, "image/jpeg");
             }
             return NotFound();
         }
-        // GET: Review/Edit/5
 
+        // GET: Review/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Review == null)
